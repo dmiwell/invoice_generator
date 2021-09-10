@@ -66,7 +66,6 @@ with open(template_name, 'r', encoding='utf-8') as f:
         BILLING_PRICE='{:.2f}'.format(BILLING_PRICE),
         BILLING_TOTAL='{:.2f}'.format(BILLING_PRICE * billing_hours),
     )
-    # data = {k: v.replace(' ', '&nbsp;') for k, v in data.items()}
     html = safe_curly.format(**data, TERMS=terms)
 
 output_file = os.path.abspath(
