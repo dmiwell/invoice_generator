@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+
+<!-- workaround for flex issue in win 10 -->
+<!-- display: flex; -->
+<!-- justify-content: space-between; -->
+<!-- to  -->
+<!-- display: -webkit-box; -->
+<!-- -webkit-box-pack: justify;  -->
+<!-- @font-face {
+    font-family: 'Calibri';
+    src: url('./Calibri.ttf') format('truetype');
+} -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Invoice{#INVOICE_NUMBER#}</title>
+    <link href='http://fonts.googleapis.com/css?family=Calibri' rel='stylesheet' type='text/css'>
+
+    <style>
+        * {
+            font-family: Calibri;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            margin-bottom: 30px;
+        }
+
+        .row h1 {
+            margin: 0;
+        }
+
+        .row-left {
+            width: 65%;
+        }
+
+        .row-right {
+            text-align: right;
+            width: 35%;
+        }
+
+        .invoice-line {
+            display: flex;
+            justify-content: space-between;
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+        }
+
+        .invoice-line-label {
+            font-weight: bold;
+            display: flex;
+            display: -webkit-box;
+        }
+        
+        .invoice-line-value {
+            
+        }
+
+        footer {
+            margin-top: 500px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            text-align: right;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        td.no-border {
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="row-left">
+            <h1>{#TO_NAME#}</h1>
+        </div>
+        <div class="row-right">
+            <h1>INVOICE</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row-left">
+            [Contractor]<br />
+            {#TO_TAX_NUMBER#}<br />
+            Registration address:&nbsp;{#TO_ADDRESS#}<br />
+            Beneficiary bank:&nbsp;{#TO_BANK#}<br />
+            SWIFT/BIC:&nbsp;{#TO_BANK_SWIFT#}<br />
+            Account&nbsp;<b>{#TO_BANK_ACCOUNT#}</b>
+        </div>
+        <div class="row-right">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row-left">
+            <b>Bill to</b><br />
+            {#FROM_ORGANIZATION#}<br />
+            [Client]<br />
+            Registration address:&nbsp;{#FROM_ADDRESS#}<br />
+            Bank details:&nbsp;{#FROM_BANK#}<br />
+            SWIFT:&nbsp;{#FROM_SWIFT#}
+            <br />Account (USD)&nbsp;<b>{#FROM_BANK_ACCOUNT#}</b>
+        </div>
+        <div class="row-right">
+
+            <div class="invoice-line">
+                <span class="invoice-line-label">Invoice #</span>
+                <span class="invoice-line-value">{#INVOICE_NUMBER#}</span>
+            </div>
+            <div class="invoice-line">
+                <span class="invoice-line-label">Invoice date</span>
+                <span class="invoice-line-value">{#INVOICE_DATE#}</span>
+            </div>
+            <div class="invoice-line">
+                <span class="invoice-line-label">Contract #</span>
+                <span class="invoice-line-value">{#CONTRACT_NUMBER#}</span>
+            </div>
+            <div class="invoice-line">
+                <span class="invoice-line-label">Contract date</span>
+                <span class="invoice-line-value">{#CONTRACT_DATE#}</span>
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <th>DESCRIPTION</th>
+            <th>QUANTITY</th>
+            <th>PRICE</th>
+            <th>AMOUNT</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{#BILLING_PERIOD#}</td>
+                <td>{#BILLING_HOURS#} hours</td>
+                <td>{#BILLING_PRICE#}</td>
+                <td>{#BILLING_TOTAL#}</td>
+            </tr>
+            <tr>
+                <td class="no-border"></td>
+                <td class="no-border"><b>TOTAL</b></td>
+                <td colspan="2">
+                    <b></b>USD {#BILLING_TOTAL#}</b>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <footer>
+        {#TERMS#}
+    </footer>
+</body>
+
+</html>

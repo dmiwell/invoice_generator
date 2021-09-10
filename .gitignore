@@ -1,0 +1,8 @@
+.DS_Store
+config.py
+
+/generated_invoices/*
+!.keep
+
+/templates/*
+!/templates/invoice_template.html
