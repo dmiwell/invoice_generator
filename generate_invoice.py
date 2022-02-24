@@ -30,7 +30,7 @@ except:
 if _input_today := input(f'TODAY ({_today.isoformat()}): '):
     date_of_invoice = date.fromisoformat(_input_today)
 else:
-    date_of_invoice = _today
+    date_of_invoice = _today.replace(day=1)
 
 
 _billing_start = (date_of_invoice.replace(day=1) - timedelta(days=1)).replace(day=1)
@@ -44,7 +44,7 @@ billing_period = (
 
 terms = TERMS if bool(input('Transfer taxes by client? [1/0](0): ')) else TERMS_TAXES_CONTRACTOR
 
-invoice_number = date_of_invoice.replace(day=1).strftime('%Y%m%d')
+invoice_number = date_of_invoice.strftime('%Y%m%d')
 
 
 def prepare_html_for_formatting(html: str) -> str:
@@ -60,7 +60,7 @@ with open(template_name, 'r', encoding='utf-8') as f:
     data = dict(
         **TEMPLATE_VARS,
         INVOICE_NUMBER=invoice_number,
-        INVOICE_DATE=date_of_invoice.replace(day=1).strftime(INVOICE_DATE_FORMAT),
+        INVOICE_DATE=date_of_invoice.strftime(INVOICE_DATE_FORMAT),
         BILLING_PERIOD=billing_period,
         BILLING_HOURS='{:.1f}'.format(billing_hours),
         BILLING_PRICE='{:.2f}'.format(BILLING_PRICE),
